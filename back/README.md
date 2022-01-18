@@ -1,6 +1,4 @@
-# Contact list (backend)
-
-
+# Aplicación semilla (backend)
 
 ## Puesta en marcha
 
@@ -14,6 +12,10 @@
 
     `python -m pytest`
 
-3. Ejecutar la aplicación
+3. Generar los datos iniciales
+
+    `python scripts/initial_data.py`
+
+4. Ejecutar la aplicación
 
     `python app.py`
