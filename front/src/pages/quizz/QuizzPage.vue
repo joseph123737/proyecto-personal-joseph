@@ -37,29 +37,37 @@ quizz: [
         failedMessage_2:false,
         failedMessage_3:false,
         correctMessage : false,
-        time:3
+        time:3,
+        time_2 :1000
 
         }
     },
     mounted(){
-/*        this.chronometer() */
+        this.chronometer() 
         },
     methods:{
-/*        chronometer(){
+        chronometer(){
              setInterval(()=>{
                 
-            if (this.time > 0){
-                this.time--
-            }
-            if (this.time == 0){
-                this.time= "jeff"
-                this.correctMessage = true
-            }    
-            },1000)
-        }, */
+                if (this.correctMessage === false){
+                        if (this.time > 0){
+                            this.time--
+                        }
+                        
+                        if (this.time == 0){
+                            this.time= "se acabo el tiempo"
+                            this.correctMessage = true
+                            document.getElementById("2").disabled = true
+                            document.getElementById("3").disabled = true
+                            document.getElementById("4").disabled = true
+
+                        }
+                }    
+            },this.time_2)
+        }, 
         checkIfItIsCorrect(answer,id_button){
             if (answer === true){
-               this.correctMessage = true
+                this.correctMessage = true
                 document.getElementById("2").disabled = true
                 document.getElementById("3").disabled = true
                 document.getElementById("4").disabled = true
