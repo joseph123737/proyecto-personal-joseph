@@ -1,16 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import Quizz from '@/pages/quizz/QuizzPage.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/pages/home/HomePage.vue'),
+    name: 'quizz',
+    component: Quizz,
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/pages/about/AboutPage.vue'),
-  },
+
 ]
 
 const router = createRouter({
