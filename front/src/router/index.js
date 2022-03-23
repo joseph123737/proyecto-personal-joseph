@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Quizz from '@/pages/quizz/QuizzPage.vue'
+import Result from '@/pages/result/ResultPage.vue'
 const routes = [
   {
     path: '/',
     name: 'quizz',
     component: Quizz,
+  },
+  {
+    path : '/result',
+    name:'result',
+    component : Result
   },
 
 ]
