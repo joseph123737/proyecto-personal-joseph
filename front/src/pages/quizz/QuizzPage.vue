@@ -1,7 +1,10 @@
 <template>
+<section v-if="startGameButton">
+    <button @click="startGame">empezar juego</button>
+
+</section>
 <section v-if="quizzContinued">
 <h1>{{time}}</h1>
-      <h1>{{quizzes.quizz_name}}</h1>
       <article v-for="i in filteredQuizz" :key="i.id" >
           <h3>{{i.question_quizz}}</h3>
           <article class="botton-answer">
@@ -35,20 +38,26 @@ export default {
         filteredQuizz:[],
         finishGame : false,
         finishGameButton : false,
-        quizzContinued:true,
+        quizzContinued:false,
         countOfGues :0,
+        startGameButton : true
 
         }
     },
     mounted(){
+        this.loadData()
         this.chronometer() 
-        this.filterQuizz()
         },
     methods:{
-/*         loadData(){
-            let response = fetch()
-        }, */
-
+        async loadData(){
+            let response =  await fetch('http://192.168.21.143:5000/api/quizz')
+            this.quizzes =  await response.json()
+        },
+        startGame(){
+            this.startGameButton = false
+            this.quizzContinued = true
+            this.filterQuizz()
+        },
         FinishGame(){
             this.quizzContinued = false
             this.finishGame = true
