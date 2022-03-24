@@ -27,17 +27,17 @@ def create_app(repositories):
                         "id_button": "1",
                     },
                     "answer_02": {
-                        "title": "esta no",
+                        "title": "la verdad que no se",
                         "is_correct": False,
                         "id_button": "2",
                     },
                     "answer_03": {
-                        "title": "esta tampoco",
+                        "title": "print los nombre de una lista",
                         "is_correct": False,
                         "id_button": "3",
                     },
                     "answer_04": {
-                        "title": "empieza a leer de nuevo",
+                        "title": "splitea una string",
                         "is_correct": False,
                         "id_button": "4",
                     },
@@ -51,57 +51,17 @@ def create_app(repositories):
                         "id_button": "1",
                     },
                     "answer_02": {
-                        "title": "esta no",
+                        "title": "string",
                         "is_correct": False,
                         "id_button": "2",
                     },
                     "answer_03": {
-                        "title": "esta tampoco",
+                        "title": "objeto",
                         "is_correct": False,
                         "id_button": "3",
                     },
                     "answer_04": {
-                        "title": "empieza a leer de nuevo",
-                        "is_correct": False,
-                        "id_button": "4",
-                    },
-                },
-                {
-                    "id": 3,
-                    "question_quizz": "esto",
-                    "answer_01": {"title": "si", "is_correct": True, "id_button": "1"},
-                    "answer_02": {
-                        "title": "esta no",
-                        "is_correct": False,
-                        "id_button": "2",
-                    },
-                    "answer_03": {
-                        "title": "esta tampoco",
-                        "is_correct": False,
-                        "id_button": "3",
-                    },
-                    "answer_04": {
-                        "title": "empieza a leer de nuevo",
-                        "is_correct": False,
-                        "id_button": "4",
-                    },
-                },
-                {
-                    "id": 4,
-                    "question_quizz": "funciona",
-                    "answer_01": {"title": "si", "is_correct": True, "id_button": "1"},
-                    "answer_02": {
-                        "title": "esta no",
-                        "is_correct": False,
-                        "id_button": "2",
-                    },
-                    "answer_03": {
-                        "title": "esta tampoco",
-                        "is_correct": False,
-                        "id_button": "3",
-                    },
-                    "answer_04": {
-                        "title": "empieza a leer de nuevo",
+                        "title": "clase",
                         "is_correct": False,
                         "id_button": "4",
                     },
