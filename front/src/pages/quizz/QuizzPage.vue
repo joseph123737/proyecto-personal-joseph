@@ -1,5 +1,5 @@
 <template>
-<section v-if="startGameButton">
+<section v-if="ifStartGame">
     <button @click="startGame">empezar juego</button>
 
 </section>
@@ -13,8 +13,8 @@
            <input type="button"  @click="checkIfItIsCorrect(i.answer_03.is_correct,i.answer_03.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_2} :value="i.answer_03.title" id="3"/>
            <input type="button"  @click="checkIfItIsCorrect(i.answer_04.is_correct,i.answer_04.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_3} :value="i.answer_04.title" id="4"/>
           </article>
-          <button v-if="nextQuizzBoolean" @click="nextQuizzButton">siguiente quizz</button>
-          <button v-if="finishGameButton" @click="FinishGame">ver resultado</button>
+          <button v-if="goToNextQuizz" @click="nextQuizz">siguiente quizz</button>
+          <button v-if="showResult" @click="FinishGame">ver resultado</button>
       </article>
 </section>
 <section v-if="finishGame">
@@ -34,13 +34,13 @@ export default {
         correctMessage : false,
         time:30,
         numberOfQuizz : 1,
-        nextQuizzBoolean:false,
+        goToNextQuizz:false,
         filteredQuizz:[],
         finishGame : false,
-        finishGameButton : false,
+        showResult : false,
         quizzContinued:false,
         countOfGues :0,
-        startGameButton : true
+        ifStartGame : true
 
         }
     },
@@ -54,7 +54,7 @@ export default {
             this.quizzes =  await response.json()
         },
         startGame(){
-            this.startGameButton = false
+            this.ifStartGame = false
             this.quizzContinued = true
             this.filterQuizz()
         },
@@ -64,24 +64,24 @@ export default {
         },
         checkGameIsFinish(){
             if (this.quizzes.quizz.length === this.numberOfQuizz){
-                this.finishGameButton = true
+                this.showResult = true
             }
             if(this.quizzes.quizz.length !== this.numberOfQuizz){
-                this.nextQuizzBoolean = true
+                this.goToNextQuizz = true
             }
         },
         filterQuizz(){
             this.filteredQuizz = this.quizzes.quizz.filter((i) => i.id ===this.numberOfQuizz)
             
         },
-        nextQuizzButton(){
+        nextQuizz(){
             this.numberOfQuizz++
             this.correctMessage = false
             this.failedMessage_1 = false
             this.failedMessage_2 = false
             this.failedMessage_3 = false
             this.time = 30
-            this.nextQuizzBoolean = false
+            this.goToNextQuizz = false
             this.filterQuizz()
         },
         chronometer(){
