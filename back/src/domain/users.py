@@ -12,7 +12,7 @@ class Users:
         return {"app_name": self.app_name}
 
 
-class InfoRepository:
+class UsersRepository:
     def __init__(self, database_path):
         self.database_path = database_path
         self.init_tables()
@@ -24,8 +24,12 @@ class InfoRepository:
 
     def init_tables(self):
         sql = """
-            create table if not exists info (
-                app_name varchar
+            create table if not exists Users (
+                user_id varchar,
+                quizz_guest integer,
+                quizz_miss integer,
+                user_name varchar
+                
             )
         """
         conn = self.create_conn()
