@@ -1,9 +1,12 @@
 import sqlite3
 
 
-class Info:
-    def __init__(self, app_name):
-        self.app_name = app_name
+class Users:
+    def __init__(self, quizz_guest, quizz_miss, user_id, user_name):
+        self.quizz_guest = quizz_guest
+        self.quizz_miss = quizz_miss
+        self.user_id = user_id
+        self.user_name = user_name
 
     def to_dict(self):
         return {"app_name": self.app_name}
@@ -30,15 +33,15 @@ class InfoRepository:
         cursor.execute(sql)
         conn.commit()
 
-    def get_info(self):
-        sql = """select * from info"""
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql)
+    # def get_info(self):
+    #     sql = """select * from info"""
+    #     conn = self.create_conn()
+    #     cursor = conn.cursor()
+    #     cursor.execute(sql)
 
-        data = cursor.fetchone()
+    #     data = cursor.fetchone()
 
-        return Info(app_name=data["app_name"])
+    #     return Info(app_name=data["app_name"])
 
     def save(self, info):
         sql = """insert into info (app_name) values (

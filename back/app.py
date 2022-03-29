@@ -1,6 +1,6 @@
 import sqlite3
 from src.webserver import create_app
-from src.domain.info import InfoRepository
+from domain.users import InfoRepository
 
 
 database_path = "data/database.db"
