@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
+from src.domain.users import Users
 
 from src.lib.utils import object_to_json
 
@@ -13,7 +14,7 @@ def create_app(repositories):
         return "...magic!"
 
     @app.route("/api/quizz", methods=["GET"])
-    def info_get():
+    def quizz_get():
         quizz = {
             "id_quizz": "01",
             "quizz_name": "prueba uno",
@@ -69,5 +70,12 @@ def create_app(repositories):
             ],
         }
         return quizz
+
+    @app.route("/api/users", methods=["PUT"])
+    def update_user():
+        body = request.json
+        new_value = Users(**body)
+        repositories["users"].update_users(new_value)
+        return ""
 
     return app

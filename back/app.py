@@ -1,13 +1,11 @@
 import sqlite3
 from src.webserver import create_app
-from domain.users import InfoRepository
+from domain.users import UsersRepository, Users
 
 
 database_path = "data/database.db"
 
-repositories = {
-    "info": InfoRepository(database_path),
-}
+repositories = {"users": UsersRepository(database_path)}
 
 app = create_app(repositories)
 

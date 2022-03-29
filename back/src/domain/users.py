@@ -24,7 +24,7 @@ class UsersRepository:
 
     def init_tables(self):
         sql = """
-            create table if not exists Users (
+            create table if not exists users (
                 user_id varchar,
                 quizz_guest integer,
                 quizz_miss integer,
@@ -47,11 +47,38 @@ class UsersRepository:
 
     #     return Info(app_name=data["app_name"])
 
-    def save(self, info):
-        sql = """insert into info (app_name) values (
-            :app_name
-        ) """
+    def save(self, user):
+        sql = """insert into users (user_id,quizz_guest,quizz_miss,user_name) values (
+            :user_id, :quizz_guest, :quizz_miss, :user_name
+         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, info.to_dict())
+        cursor.execute(
+            sql,
+            {
+                "user_id": user.user_id,
+                "quizz_guest": user.quizz_guest,
+                "quizz_miss": user.quizz_miss,
+                "user_id": user.user_id,
+                "user_name": user.user_name,
+            },
+        )
+        conn.commit()
+
+    def update_users(self, new_values):
+        sql = """
+        UPDATE users SET quizz_guest = :quizz_guest,
+                         quizz_miss = :quizz_miss
+                     WHERE user_id = :user_id
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql,
+            {
+                "quizz_guest": new_values.quizz_guest,
+                "quizz_miss": new_values.quizz_miss,
+                "user_id": new_values.user_id,
+            },
+        )
         conn.commit()
