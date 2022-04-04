@@ -1,9 +1,5 @@
 <template>
-<section v-if="ifStartGame">
-    <button @click="startGame">empezar juego</button>
-
-</section>
-<section v-if="quizzContinued">
+<section>
 <h1>{{time}}</h1>
       <article v-for="i in filteredQuizz" :key="i.id" >
           <h3>{{i.question_quizz}}</h3>
@@ -14,13 +10,11 @@
            <input type="button"  @click="checkIfItIsCorrect(i.answer_04.is_correct,i.answer_04.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_3} :value="i.answer_04.title" id="4"/>
           </article>
           <button v-if="goToNextQuizz" @click="nextQuizz">siguiente quizz</button>
-          <button v-if="showResult" @click="FinishGame">ver resultado</button>
+          <router-link v-if="showResult" :to="{name:'result',params:{guest:countOfGues}}">
+          <button>ver resultado</button>
+          </router-link>
       </article>
 </section>
-<section v-if="finishGame">
-    <h2>As acertado: {{countOfGues}} de {{quizzes.quizz.length}}</h2>
-</section>
-
 </template>
 
 <script>
@@ -37,10 +31,9 @@ export default {
         goToNextQuizz:false,
         filteredQuizz:[],
         finishGame : false,
-        showResult : false,
         quizzContinued:false,
         countOfGues :0,
-        ifStartGame : true
+        showResult : false
 
         }
     },
@@ -52,15 +45,7 @@ export default {
         async loadData(){
             let response =  await fetch('http://192.168.21.143:5000/api/quizz')
             this.quizzes =  await response.json()
-        },
-        startGame(){
-            this.ifStartGame = false
-            this.quizzContinued = true
             this.filterQuizz()
-        },
-        FinishGame(){
-            this.quizzContinued = false
-            this.finishGame = true
         },
         checkGameIsFinish(){
             if (this.quizzes.quizz.length === this.numberOfQuizz){
