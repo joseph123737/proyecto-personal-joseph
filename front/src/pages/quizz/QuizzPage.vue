@@ -10,7 +10,7 @@
            <input type="button"  @click="checkIfItIsCorrect(i.answer_04.is_correct,i.answer_04.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_3} :value="i.answer_04.title" id="4"/>
           </article>
           <button v-if="goToNextQuizz" @click="nextQuizz">siguiente quizz</button>
-          <router-link v-if="showResult" :to="{name:'result',params:{guest:countOfGues}}">
+          <router-link v-if="showResult" :to="{name:'result',params:{guest:countOfGuest,miss:countOfMiss}}">
           <button>ver resultado</button>
           </router-link>
       </article>
@@ -26,13 +26,14 @@ export default {
         failedMessage_2:false,
         failedMessage_3:false,
         correctMessage : false,
-        time:30,
+        time:3,
         numberOfQuizz : 1,
         goToNextQuizz:false,
         filteredQuizz:[],
         finishGame : false,
         quizzContinued:false,
-        countOfGues :0,
+        countOfGuest :0,
+        countOfMiss: 0,
         showResult : false
 
         }
@@ -83,20 +84,24 @@ export default {
                             document.getElementById("2").disabled = true
                             document.getElementById("3").disabled = true
                             document.getElementById("4").disabled = true
+                            this.countOfMiss++
+                            this.checkGameIsFinish()
 
                         }
                 }    
             },1000)
+            
         }, 
         checkIfItIsCorrect(answer,id_button){
             if (answer === true){
-                this.countOfGues++
+                this.countOfGuest++
                 this.correctMessage = true
                 document.getElementById("2").disabled = true
                 document.getElementById("3").disabled = true
                 document.getElementById("4").disabled = true
             }
             if (answer === false && id_button ==="2") {
+                this.countOfMiss++
                 this.failedMessage_1 = true
                 this.correctMessage = true
                 document.getElementById("3").disabled = true
@@ -104,12 +109,14 @@ export default {
 
             }
             if (answer === false && id_button ==="3") {
+                this.countOfMiss++
                 this.failedMessage_2 = true
                 this.correctMessage = true
                 document.getElementById("2").disabled = true
                 document.getElementById("4").disabled = true
             }
             if (answer === false && id_button ==="4") {
+                this.countOfMiss++
                 this.failedMessage_3 = true
                 this.correctMessage = true
                 document.getElementById("2").disabled = true
