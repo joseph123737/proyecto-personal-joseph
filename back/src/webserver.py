@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
-from src.domain.users import Users
-
+from src.domain.stats_user import UserQuizzes
+from src.domain.login_users import Users
 from src.lib.utils import object_to_json
 
 
@@ -71,11 +71,20 @@ def create_app(repositories):
         }
         return quizz
 
-    @app.route("/api/users", methods=["PUT"])
-    def update_user():
+    @app.route("/api/login-users/<id>", methods=["GET"])
+    def get_user_by_id(id):
+        data = repositories["users"].get_user_by_id(id)
+        user = object_to_json(data)
+        print("----------")
+        return user
+
+    @app.route("/auth/login", methods=["POST"])
+    def login():
         body = request.json
-        new_value = Users(**body)
-        repositories["users"].update_users(new_value)
-        return ""
+        user = repositories["users"].get_user_by_id(body["user_id"])
+        if user.password != body["password"] or user == None:
+            return "", 401
+        else:
+            return object_to_json(user)
 
     return app
