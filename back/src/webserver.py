@@ -15,62 +15,10 @@ def create_app(repositories):
         return "...magic!"
 
     @app.route("/api/quizz", methods=["GET"])
-    def quizz_get():
-        quizz = {
-            "id_quizz": "01",
-            "quizz_name": "prueba uno",
-            "quizz": [
-                {
-                    "id": 1,
-                    "question_quizz": "que hace la siguiente list comprehension :  [( i) for i in range (5) ]",
-                    "answer_01": {
-                        "title": "hace un for del 1 al 5",
-                        "is_correct": True,
-                        "id_button": "1",
-                    },
-                    "answer_02": {
-                        "title": "la verdad que no se",
-                        "is_correct": False,
-                        "id_button": "2",
-                    },
-                    "answer_03": {
-                        "title": "print los nombre de una lista",
-                        "is_correct": False,
-                        "id_button": "3",
-                    },
-                    "answer_04": {
-                        "title": "splitea una string",
-                        "is_correct": False,
-                        "id_button": "4",
-                    },
-                },
-                {
-                    "id": 2,
-                    "question_quizz": "que tipo de dato es este : 01  ",
-                    "answer_01": {
-                        "title": "Integer",
-                        "is_correct": True,
-                        "id_button": "1",
-                    },
-                    "answer_02": {
-                        "title": "string",
-                        "is_correct": False,
-                        "id_button": "2",
-                    },
-                    "answer_03": {
-                        "title": "objeto",
-                        "is_correct": False,
-                        "id_button": "3",
-                    },
-                    "answer_04": {
-                        "title": "clase",
-                        "is_correct": False,
-                        "id_button": "4",
-                    },
-                },
-            ],
-        }
-        return quizz
+    def get_all_quizzes():
+        data = repositories["quizzes"].get_all_quizzes()
+        print("---------------", data)
+        return object_to_json(data)
 
     @app.route("/api/quizz/<id>", methods=["GET"])
     def get_quizz_by_id(id):

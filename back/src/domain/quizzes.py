@@ -67,3 +67,18 @@ class QuizzesRepository:
             quizzes=json.loads(data["quizzes"]),
         )
         return quizz
+
+    def get_all_quizzes(self):
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM quizzes""")
+        data = cursor.fetchall()
+        quizzes_list = []
+        for item in data:
+            quizz = Quizzes(
+                id_quizz=item["id_quizz"],
+                quizz_name=item["quizz_name"],
+                quizzes=json.loads(item["quizzes"]),
+            )
+            quizzes_list.append(quizz)
+        return quizzes_list

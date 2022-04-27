@@ -6,7 +6,7 @@
         {
             "label": "run tests",
             "type": "shell",
-            "command": "python -m pytest",
+            "command": "python -m pytest -vv",
             "presentation": {
                 "clear": true
             },
