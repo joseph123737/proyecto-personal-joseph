@@ -1,8 +1,6 @@
 <template>
   <h1>HAS ACERTADO: {{countOfGuest}} DE {{countOfMiss+countOfGuest}}</h1>
-  <router-link :to="{name:'user'}">
-    <button>ver perfil</button>
-  </router-link>
+    <button @click="userDetail">ver perfil</button>
 </template>
 
 <script>
@@ -14,7 +12,7 @@ export default {
      newData: {guest:this.countOfGuest,miss:this.countOfMiss}
     }
   },
-  // methods:{
+ methods:{
   //   updateUser(){
   //     const settings = {
   //       method: "PUT",
@@ -24,8 +22,14 @@ export default {
   //       },
   //     };
   //     await fetch('api/users/01', settings);
-  //   }
-  // },
+  //   },
+    
+    userDetail(){
+        const userJson = localStorage.getItem("auth");
+        const user = JSON.parse(userJson);
+        this.$router.push({name:"user",params:{id:user.user_id}})
+    },
+  },
 
 
 

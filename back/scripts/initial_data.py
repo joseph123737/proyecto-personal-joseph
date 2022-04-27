@@ -1,7 +1,7 @@
 import sys
 
 sys.path.insert(0, "")
-from src.domain.users import Users, UsersRepository
+from src.domain.login_users import Users, UsersRepository
 
 
 def main():
@@ -10,7 +10,7 @@ def main():
 
     users_repository = UsersRepository(database_path)
 
-    users_repository.save(Users(app_name="f5-seed-app"))
+    users_repository.save(Users("01", "mata_bebes", "Valentina"))
 
 
 if __name__ == "__main__":

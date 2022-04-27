@@ -26,7 +26,7 @@ export default {
         failedMessage_2:false,
         failedMessage_3:false,
         correctMessage : false,
-        time:3,
+        time:30,
         numberOfQuizz : 1,
         goToNextQuizz:false,
         filteredQuizz:[],

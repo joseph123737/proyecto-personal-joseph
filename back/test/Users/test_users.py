@@ -1,7 +1,7 @@
 from src.lib.utils import temp_file
 
 from src.webserver import create_app
-from src.domain.users import Users
+from src.domain.login_users import Users
 
 """ 
 def test_should_return_info_in_database():
@@ -23,8 +23,7 @@ def test_should_return_info_in_database():
 
 
 def test_if_constructor_is_correct():
-    user = Users(12, 2, "1", "Valentina")
-    assert "1" == user.user_id
-    assert 12 == user.quizz_guest
-    assert 2 == user.quizz_miss
+    user = Users("01", "mata_bebes", "Valentina")
+    assert "01" == user.user_id
     assert "Valentina" == user.user_name
+    assert "mata_bebes" == user.password
