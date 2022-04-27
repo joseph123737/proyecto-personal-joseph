@@ -1,11 +1,15 @@
 import sqlite3
+from domain.quizzes import QuizzesRepository
 from src.webserver import create_app
 from src.domain.login_users import UsersRepository
 
 
 database_path = "data/database.db"
 
-repositories = {"users": UsersRepository(database_path)}
+repositories = {
+    "users": UsersRepository(database_path),
+    "quizzes":QuizzesRepository(database_path)
+    }
 
 app = create_app(repositories)
 

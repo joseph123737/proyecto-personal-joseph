@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from src.domain.stats_user import UserQuizzes
 from src.domain.login_users import Users
+from src.domain.quizzes import Quizzes
 from src.lib.utils import object_to_json
 
 
@@ -69,6 +70,13 @@ def create_app(repositories):
                 },
             ],
         }
+        return quizz
+
+    @app.route("/api/quizz/<id>", methods=["GET"])
+    def get_quizz_by_id(id):
+        data = repositories["quizzes"].get_quizz_by_id(id)
+        quizz = object_to_json(data)
+        print("----------")
         return quizz
 
     @app.route("/api/login-users/<id>", methods=["GET"])

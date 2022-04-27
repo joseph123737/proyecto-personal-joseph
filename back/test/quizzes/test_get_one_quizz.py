@@ -38,8 +38,7 @@ def test_should_return_one_quizz():
         ],
     )
     quizzes_repository.save_quizz(quizz)
-    body = {"id_quizz": "01"}
-    response = client.get("api/quizz/01", json=body)
+    response = client.get("api/quizz/01")
     assert response.status_code == 200
     assert response.json == {
         "id_quizz": "01",
