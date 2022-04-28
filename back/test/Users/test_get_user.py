@@ -10,7 +10,7 @@ def test_should_get_a_correct_user():
     user = Users("01", "mata_bebes", "Valentina")
     users_repository.save(user)
     body = {"user_id": "01"}
-    response = client.get("/api/login-users/01", json=body)
+    response = client.get("/api/users/login-users/01", json=body)
     assert response.json == {
         "user_id": "01",
         "user_name": "Valentina",
