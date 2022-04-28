@@ -17,21 +17,18 @@ def create_app(repositories):
     @app.route("/api/quizz", methods=["GET"])
     def get_all_quizzes():
         data = repositories["quizzes"].get_all_quizzes()
-        print("---------------", data)
         return object_to_json(data)
 
     @app.route("/api/quizz/<id>", methods=["GET"])
     def get_quizz_by_id(id):
         data = repositories["quizzes"].get_quizz_by_id(id)
         quizz = object_to_json(data)
-        print("----------")
         return quizz
 
     @app.route("/api/login-users/<id>", methods=["GET"])
     def get_user_by_id(id):
         data = repositories["users"].get_user_by_id(id)
         user = object_to_json(data)
-        print("----------")
         return user
 
     @app.route("/auth/login", methods=["POST"])
