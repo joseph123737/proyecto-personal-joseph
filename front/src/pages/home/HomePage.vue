@@ -40,7 +40,7 @@ export default {
     if (response.status == 200){
       const auth = await response.json();
       this.auth = auth;
-      this.$router.push({name:"quizz"})
+      this.$router.push({name:"quizzes"})
     }
     }
   }

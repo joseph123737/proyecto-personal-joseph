@@ -44,20 +44,20 @@ export default {
         },
     methods:{
         async loadData(){
-            let response =  await fetch('http://192.168.21.143:5000/api/quizz')
+            let response =  await fetch('http://192.168.21.143:5000/api/quizz/'+this.$route.params.id)
             this.quizzes =  await response.json()
             this.filterQuizz()
         },
         checkGameIsFinish(){
-            if (this.quizzes.quizz.length === this.numberOfQuizz){
+            if (this.quizzes.quizzes.length === this.numberOfQuizz){
                 this.showResult = true
             }
-            if(this.quizzes.quizz.length !== this.numberOfQuizz){
+            if(this.quizzes.quizzes.length !== this.numberOfQuizz){
                 this.goToNextQuizz = true
             }
         },
         filterQuizz(){
-            this.filteredQuizz = this.quizzes.quizz.filter((i) => i.id ===this.numberOfQuizz)
+            this.filteredQuizz = this.quizzes.quizzes.filter((i) => i.id ===this.numberOfQuizz)
             
         },
         nextQuizz(){
