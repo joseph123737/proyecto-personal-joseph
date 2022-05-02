@@ -9,25 +9,24 @@ export default {
     return{
      countOfGuest :  parseInt(this.$route.params.guest),
      countOfMiss:parseInt(this.$route.params.miss),
-     newData: {guest:this.countOfGuest,miss:this.countOfMiss}
+     newData: {quizz_guest:parseInt(this.$route.params.guest),quizz_miss:parseInt(this.$route.params.miss)}
     }
   },
  methods:{
-  //   updateUser(){
-  //     const settings = {
-  //       method: "PUT",
-  //       body: JSON.stringify(this.newData),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     };
-  //     await fetch('api/users/01', settings);
-  //   },
-    
-    userDetail(){
+    async userDetail(){
         const userJson = localStorage.getItem("auth");
         const user = JSON.parse(userJson);
-        this.$router.push({name:"user",params:{id:user.user_id}})
+        const settings = {
+              method: "PUT",
+              body: JSON.stringify(this.newData),
+              headers: {
+                "Content-Type": "application/json"
+              },
+        };
+        let response =  await fetch(`http://192.168.21.143:5000/api/users/users-stats/change-stats/${user.user_id}`,settings)
+        if (response.status == 200){
+          this.$router.push({name:"user",params:{id:user.user_id}})
+        }
     },
   },
 

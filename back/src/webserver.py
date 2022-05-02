@@ -41,6 +41,7 @@ def create_app(repositories):
     def update_user(id):
         new_stats = {}
         body = request.json
+        print(body)
         data = repositories["users_stats"].get_user_stats_by_id(id)
         new_stats["quizz_guest"] = body["quizz_guest"] + data.quizz_guest
         new_stats["quizz_miss"] = body["quizz_miss"] + data.quizz_miss

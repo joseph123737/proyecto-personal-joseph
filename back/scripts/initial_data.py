@@ -2,7 +2,7 @@ import sys
 
 sys.path.insert(0, "")
 from src.domain.login_users import Users, UsersRepository
-
+from src.domain.stats_user import UsersStats, UserStatsRepository
 from src.domain.quizzes import Quizzes, QuizzesRepository
 
 
@@ -48,6 +48,8 @@ def main():
             ],
         )
     )
+    users_stast_repository = UserStatsRepository(database_path)
+    users_stast_repository.save_users_stats(UsersStats(12, 2, "01", "Valentina"))
 
 
 if __name__ == "__main__":
