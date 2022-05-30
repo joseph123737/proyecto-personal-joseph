@@ -1,4 +1,5 @@
 <template>
+  <h1>¿Que quizz quieres hacer?</h1>
   <div v-for="quizz of quizzes" :key="quizz.id_quizz">
   <router-link :to=" {name:'quizz',params:{id:quizz.id_quizz} }">
     <p>{{quizz.quizz_name}}</p>

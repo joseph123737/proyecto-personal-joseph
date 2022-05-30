@@ -1,4 +1,5 @@
 import sqlite3
+from src.domain.stats_user import UserStatsRepository, UsersStats
 
 
 class Users:
@@ -23,9 +24,10 @@ class UsersRepository:
     def init_tables(self):
         sql = """
             create table if not exists users (
-                user_id varchar,
+                user_id varchar  PRIMARY KEY NOT NULL ,
                 password varchar,
-                user_name varchar
+                user_name varchar 
+                
                 
             )
         """
@@ -54,6 +56,7 @@ class UsersRepository:
             },
         )
         conn.commit()
+        conn.close()
 
     def get_user_by_id(self, user_id):
         conn = self.create_conn()
@@ -66,3 +69,24 @@ class UsersRepository:
             password=data["password"],
         )
         return user
+
+    def register_new_user(self, body):
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        sql = """insert into users (user_id,password,user_name) values (
+            :user_id, :password, :user_name
+         ) 
+         """
+        params = {
+            "user_id": body.user_id,
+            "password": body.password,
+            "user_name": body.user_name,
+        }
+        cursor.execute(sql, params)
+        conn.commit()
+        conn.close()
+        new_user_stats = UsersStats(
+            user_id=body.user_id, quizz_guest=0, quizz_miss=0, user_name=body.user_name
+        )
+        stats_repository = UserStatsRepository("data/database.db")
+        stats_repository.save_users_stats(new_user_stats)

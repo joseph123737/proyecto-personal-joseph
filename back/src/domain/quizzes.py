@@ -26,7 +26,10 @@ class QuizzesRepository:
             create table if not exists quizzes (
                 id_quizz varchar,
                 quizz_name varchar,
-                quizzes varchar
+                quizzes varchar,
+                user_id varchar,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+                ON DELETE  CASCADE
                 
             )
         """

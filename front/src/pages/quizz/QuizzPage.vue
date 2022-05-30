@@ -40,9 +40,12 @@ export default {
     },
     mounted(){
         this.loadData()
-        this.chronometer() 
+        this.chronometer()
         },
     methods:{
+        aa(){
+            document.getElementById("aa").focus()
+        },  
         async loadData(){
             let response =  await fetch('http://192.168.21.143:5000/api/quizz/'+this.$route.params.id)
             this.quizzes =  await response.json()

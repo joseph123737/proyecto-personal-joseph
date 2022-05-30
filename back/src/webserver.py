@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.domain.stats_user import UsersStats
-from src.domain.login_users import Users
+from src.domain.login_users import Users, UsersRepository
 from src.domain.quizzes import Quizzes
 from src.lib.utils import object_to_json
 
@@ -30,6 +30,17 @@ def create_app(repositories):
         data = repositories["users"].get_user_by_id(id)
         user = object_to_json(data)
         return user
+
+    @app.route("/api/users/login-users/add-new-user", methods=["POST"])
+    def register_new_users():
+        body = request.json
+        new_user = Users(
+            user_id=body["user_id"],
+            password=body["password"],
+            user_name=body["user_name"],
+        )
+        repositories["users"].register_new_user(new_user)
+        return "", 200
 
     @app.route("/api/users/users-stats/<id>", methods=["GET"])
     def get_stats_user_by_id(id):

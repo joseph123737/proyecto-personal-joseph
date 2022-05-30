@@ -4,6 +4,7 @@ import Quizz from '@/pages/quizz/QuizzPage.vue'
 import Quizzes from '@/pages/quizzes/QuizzesPage.vue'
 import Result from '@/pages/result/ResultPage.vue'
 import User from '@/pages/user/UserPage.vue'
+import newUser from '@/pages/register_new_user/RegisterNewUsersPage.vue'
 const routes = [
   {
     path: '/',
@@ -29,6 +30,11 @@ const routes = [
     path:'/user/:id',
     name:'user',
     component:User
+  },
+  {
+    path:'/user/newUser',
+    name:'new_user',
+    component:newUser
   },
   
 

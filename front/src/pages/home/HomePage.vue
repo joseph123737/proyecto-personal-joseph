@@ -11,6 +11,9 @@
 
       <button class="login-btn" @click="authenticationUser">logearse</button>
   </section>
+  <router-link :to="{name:'new_user'}" >
+  <p>no tienes un usuario clicka aqui</p>
+  </router-link>
 </template>
 
 <script>
@@ -21,6 +24,9 @@ export default {
        user:{},
        auth: useStorage("auth", {}),
     }
+  },
+  mounted(){
+    this.aa()
   },
   methods:{
     async authenticationUser(){
@@ -42,6 +48,10 @@ export default {
       this.auth = auth;
       this.$router.push({name:"quizzes"})
     }
+    },
+    aa(){
+      let a = document.getElementById("password").focus()
+      console.log(a)
     }
   }
 

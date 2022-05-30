@@ -30,10 +30,12 @@ class UserStatsRepository:
     def init_tables(self):
         sql = """
             create table if not exists users_stats (
-                user_id varchar,
                 quizz_guest integer,
                 quizz_miss integer,
-                user_name varchar
+                user_name varchar,
+                user_id varchar ,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+                ON DELETE  CASCADE
                 
             )
         """
@@ -58,6 +60,7 @@ class UserStatsRepository:
             },
         )
         conn.commit()
+        conn.close()
 
     def update_user_quizzes(self, new_values, user_id):
         sql = """
@@ -76,6 +79,7 @@ class UserStatsRepository:
             },
         )
         conn.commit()
+        conn.close()
 
     def get_user_stats_by_id(self, user_id):
         conn = self.create_conn()
