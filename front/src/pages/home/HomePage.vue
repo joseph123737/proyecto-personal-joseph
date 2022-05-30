@@ -4,12 +4,12 @@
   </section>
   <section class="form">
       <label for="username">introduzca su usuario</label>
-      <input type="text" v-model="user.user_id" id="username">
+      <input type="text" v-model="user.user_name" id="username">
 
       <label for="password">introduzca su contraseña</label>
-      <input type="password" v-model="user.password" id="password">
+      <input type="password" v-on:keyup.enter="authenticationUser()" v-model="user.password" id="password">
 
-      <button class="login-btn" @click="authenticationUser">logearse</button>
+      <button class="login-btn">logearse</button>
   </section>
   <router-link :to="{name:'new_user'}" >
   <p>no tienes un usuario clicka aqui</p>

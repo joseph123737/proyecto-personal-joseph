@@ -4,9 +4,9 @@
   <input type="text"  id="userName" v-model="newUser.user_name">
 
   <label for="password" class="input-form">Contraseña: </label>
-  <input type="text" id="password"  v-model="newUser.password">
+  <input type="text" id="password" v-on:keyup.enter="sendNewUser()" v-model="newUser.password">
 </section>
-  <button class="login-btn" @click="sendNewUser">Registrase</button>
+  <button class="login-btn" >Registrase</button>
 </template>
 
 <script>

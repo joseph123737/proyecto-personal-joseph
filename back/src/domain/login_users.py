@@ -26,7 +26,7 @@ class UsersRepository:
             create table if not exists users (
                 user_id varchar  PRIMARY KEY NOT NULL ,
                 password varchar,
-                user_name varchar 
+                user_name varchar UNIQUE 
                 
                 
             )
@@ -58,10 +58,10 @@ class UsersRepository:
         conn.commit()
         conn.close()
 
-    def get_user_by_id(self, user_id):
+    def get_user_by_name(self, user_name):
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute("""SELECT * FROM users WHERE user_id =?""", (user_id,))
+        cursor.execute("""SELECT * FROM users WHERE user_name =?""", (user_name,))
         data = cursor.fetchone()
         user = Users(
             user_id=data["user_id"],
