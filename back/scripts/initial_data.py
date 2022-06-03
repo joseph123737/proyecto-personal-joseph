@@ -12,7 +12,7 @@ def main():
 
     users_repository = UsersRepository(database_path)
 
-    users_repository.save(Users("02", "dos", "Valentina"))
+    users_repository.save(Users("01", "dos", "Valentina"))
 
     quizzes_repository = QuizzesRepository(database_path)
 
