@@ -5,8 +5,8 @@
 
   <label for="password" class="input-form">Contraseña: </label>
   <input type="text" id="password" v-on:keyup.enter="sendNewUser()" v-model="newUser.password">
+  <button class="login-btn" >Registrase</button> 
 </section>
-  <button class="login-btn" >Registrase</button>
 </template>
 
 <script>
@@ -63,6 +63,7 @@ export default {
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
   margin-top: 1em;
+  text-align: center;
 
 }
 .login-btn:hover{

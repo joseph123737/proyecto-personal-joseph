@@ -25,6 +25,17 @@ def create_app(repositories):
         quizz = object_to_json(data)
         return quizz
 
+    @app.route("/api/quizz/add-quizz", methods=["POST"])
+    def post_new_quizz():
+        body = request.json
+        quizz_to_save = Quizzes(
+            id_quizz=body["id_quizz"],
+            quizz_name=body["quizz_name"],
+            quizzes=body["quizzes"],
+        )
+        repositories["quizzes"].save_quizz(quizz_to_save)
+        return "", 200
+
     @app.route("/api/users/login-users/<id>", methods=["GET"])
     def get_user_by_id(id):
         data = repositories["users"].get_user_by_id(id)

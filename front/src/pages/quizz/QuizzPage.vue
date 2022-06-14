@@ -42,10 +42,7 @@ export default {
         this.loadData()
         this.chronometer()
         },
-    methods:{
-        aa(){
-            document.getElementById("aa").focus()
-        },  
+    methods:{ 
         async loadData(){
             let response =  await fetch('http://192.168.21.143:5000/api/quizz/'+this.$route.params.id)
             this.quizzes =  await response.json()

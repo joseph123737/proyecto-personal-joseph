@@ -1,6 +1,6 @@
 <template>
   <section>
-      <h1>Bienvenido a Proyecto Escorpion(temporal)</h1>
+      <h1 class="text">Bienvenido a Proyecto Escorpion(temporal)</h1>
   </section>
   <section class="form">
       <label for="username">introduzca su usuario</label>
@@ -11,7 +11,7 @@
 
       <button class="login-btn">logearse</button>
   </section>
-  <router-link :to="{name:'new_user'}" >
+  <router-link :to="{name:'new_user'}" class="text" >
   <p>no tienes un usuario clicka aqui</p>
   </router-link>
 </template>
@@ -78,6 +78,8 @@ export default {
 .login-btn:hover{
   background-color: #771e1e;
 }
-
+.text{
+  text-align: center;
+}
 
 </style>
