@@ -39,7 +39,7 @@ export default {
     methods:{
         deleteQuizz(quizz){
             let index = this.dict_quizz.indexOf(quizz)
-            this.dict_quizz.splice(indix,1)
+            this.dict_quizz.splice(index,1)
             this.$emit("changed",this.dict_quizz)
         },
         closeModal(){
