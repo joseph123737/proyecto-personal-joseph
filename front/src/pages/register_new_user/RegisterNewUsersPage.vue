@@ -5,7 +5,7 @@
 
   <label for="password" class="input-form">Contraseña: </label>
   <input type="text" id="password" v-on:keyup.enter="sendNewUser()" v-model="newUser.password">
-  <button class="login-btn" >Registrase</button> 
+  <button class="login-btn" @click="sendNewUser">Registrase</button> 
 </section>
 </template>
 
@@ -31,7 +31,6 @@ export default {
                     "Content-Type": "application/json",
                 },
                 };
-            console.log(config.API_PATH)
             var response = await fetch(`${config.API_PATH}/users/login-users/add-new-user`, settings);
             if (response.status == 200){
                 alert("usuario añadido con exitosamente")
