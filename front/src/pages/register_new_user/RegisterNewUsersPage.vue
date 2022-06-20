@@ -32,6 +32,9 @@ export default {
                 },
                 };
             var response = await fetch(`${config.API_PATH}/users/login-users/add-new-user`, settings);
+            if (response.status == 409){
+                alert("Ese usuario ya existe")
+            }
             if (response.status == 200){
                 alert("usuario añadido con exitosamente")
                 this.$router.push({name:"home"})

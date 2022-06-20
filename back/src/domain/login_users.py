@@ -59,34 +59,44 @@ class UsersRepository:
         conn.close()
 
     def get_user_by_name(self, user_name):
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute("""SELECT * FROM users WHERE user_name =?""", (user_name,))
-        data = cursor.fetchone()
-        user = Users(
-            user_id=data["user_id"],
-            user_name=data["user_name"],
-            password=data["password"],
-        )
-        return user
+        try:
+            conn = self.create_conn()
+            cursor = conn.cursor()
+            cursor.execute("""SELECT * FROM users WHERE user_name =?""", (user_name,))
+            data = cursor.fetchone()
+            user = Users(
+                user_id=data["user_id"],
+                user_name=data["user_name"],
+                password=data["password"],
+            )
+            return user
+        except TypeError:
+            return 404
 
     def register_new_user(self, body):
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        sql = """insert into users (user_id,password,user_name) values (
-            :user_id, :password, :user_name
-         ) 
-         """
-        params = {
-            "user_id": body.user_id,
-            "password": body.password,
-            "user_name": body.user_name,
-        }
-        cursor.execute(sql, params)
-        conn.commit()
-        conn.close()
-        new_user_stats = UsersStats(
-            user_id=body.user_id, quizz_guest=0, quizz_miss=0, user_name=body.user_name
-        )
-        stats_repository = UserStatsRepository("data/database.db")
-        stats_repository.save_users_stats(new_user_stats)
+        try:
+            conn = self.create_conn()
+            cursor = conn.cursor()
+            sql = """insert into users (user_id,password,user_name) values (
+                :user_id, :password, :user_name
+            ) 
+            """
+            params = {
+                "user_id": body.user_id,
+                "password": body.password,
+                "user_name": body.user_name,
+            }
+            cursor.execute(sql, params)
+            conn.commit()
+            conn.close()
+            new_user_stats = UsersStats(
+                user_id=body.user_id,
+                quizz_guest=0,
+                quizz_miss=0,
+                user_name=body.user_name,
+            )
+            stats_repository = UserStatsRepository("data/database.db")
+            stats_repository.save_users_stats(new_user_stats)
+
+        except sqlite3.IntegrityError:
+            return 409

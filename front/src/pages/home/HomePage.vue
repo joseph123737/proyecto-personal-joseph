@@ -9,7 +9,7 @@
       <label for="password">introduzca su contraseña</label>
       <input type="password" v-on:keyup.enter="authenticationUser()" v-model="user.password" id="password">
 
-      <button class="login-btn">logearse</button>
+      <button class="login-btn" @click="authenticationUser">logearse</button>
   </section>
   <router-link :to="{name:'new_user'}" class="text" >
   <p>no tienes un usuario clicka aqui</p>
@@ -25,10 +25,19 @@ export default {
        auth: useStorage("auth", {}),
     }
   },
-  mounted(){
-    this.aa()
-  },
   methods:{
+    checkIfTheInputAreEmpty(){
+      if (this.user.user_name === "" ||
+        this.user.password === "" ||
+        this.user.user_name === undefined ||
+        this.user.password === undefined
+        ){
+          return false
+
+      }else{
+          return true
+      }
+    },
     async authenticationUser(){
       const settings = {
         method: "POST",
@@ -36,23 +45,25 @@ export default {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(this.user),
-        
-
     };
-    const response = await fetch("http://localhost:5000/auth/login", settings);
-    if (response.status == 401){
-      alert("unauthorize")
-    }
-    if (response.status == 200){
-      const auth = await response.json();
-      this.auth = auth;
-      this.$router.push({name:"quizzes"})
+    if (this.checkIfTheInputAreEmpty()){
+      const response = await fetch("http://localhost:5000/auth/login", settings);
+      if (response.status == 401){
+        alert("unauthorize")
+      }
+      if (response.status == 404){
+        alert("El usuario introducido no existe")
+      }
+      if (response.status == 200){
+        const auth = await response.json();
+        this.auth = auth;
+        this.$router.push({name:"quizzes"})
+      }
+    }else{
+      alert("comprueba si algun campo esta vacio")
     }
     },
-    aa(){
-      let a = document.getElementById("password").focus()
-      console.log(a)
-    }
+    
   }
 
 }

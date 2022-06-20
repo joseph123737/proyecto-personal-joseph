@@ -50,8 +50,11 @@ def create_app(repositories):
             password=body["password"],
             user_name=body["user_name"],
         )
-        repositories["users"].register_new_user(new_user)
-        return "", 200
+        response_of_user_is_ok = repositories["users"].register_new_user(new_user)
+        if response_of_user_is_ok == 409:
+            return "", 409
+        else:
+            return "", 200
 
     @app.route("/api/users/users-stats/<id>", methods=["GET"])
     def get_stats_user_by_id(id):
@@ -74,6 +77,10 @@ def create_app(repositories):
     def login():
         body = request.json
         user = repositories["users"].get_user_by_name(body["user_name"])
+        if user == 404:
+            return "", 404
+        if user == 409:
+            return "", 409
         if user.password != body["password"] or user == None:
             return "", 401
         else:
