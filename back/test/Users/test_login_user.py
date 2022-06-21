@@ -18,14 +18,14 @@ def setup():
 
 def test_should_return_correct_status_code():
     client = setup()
-    body = {"user_id": "02", "password": "patata"}
+    body = {"user_name": "alfredo", "password": "patata"}
     response = client.post("/auth/login", json=body)
     assert response.status_code == 200
 
 
 def test_should_get_a_correct_user():
     client = setup()
-    body = {"user_id": "02", "password": "patata"}
+    body = {"user_name": "alfredo", "password": "patata"}
     response = client.post("/auth/login", json=body)
     assert response.status_code == 200
     assert response.json == {
@@ -37,7 +37,7 @@ def test_should_get_a_correct_user():
 
 def test_should_return_401_when_the_password_is_incorrect():
     client = setup()
-    body = {"user_id": "02", "password": "pataa"}
+    body = {"user_name": "alfredo", "password": "pataa"}
     response = client.post("/auth/login", json=body)
     assert response.status_code == 401
     assert response.json == None

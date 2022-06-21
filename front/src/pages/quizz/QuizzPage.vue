@@ -4,17 +4,19 @@
       <article v-for="i in filteredQuizz" :key="i.id" >
           <h3>{{i.question_quizz}}</h3>
           <article class="btn-answer">
-          <input type="button" class="btn-text"  @click="checkIfItIsCorrect(i.answer_01.is_correct,i.answer_01.id_button),checkGameIsFinish()" v-bind:class={true:correctMessage} :value="i.answer_01.title" id="1"/>
-           <input type="button" class="btn-text" @click="checkIfItIsCorrect(i.answer_02.is_correct,i.answer_02.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_1} :value="i.answer_02.title" id="2"/>
-           <input type="button"  class="btn-text" @click="checkIfItIsCorrect(i.answer_03.is_correct,i.answer_03.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_2} :value="i.answer_03.title" id="3"/>
-           <input type="button" class="btn-text" @click="checkIfItIsCorrect(i.answer_04.is_correct,i.answer_04.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_3} :value="i.answer_04.title" id="4"/>
+           <input type="button" class="btn-text"  @click="checkIfItIsCorrect(i.answer_01.is_correct,i.answer_01.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_1,true:correctMessage_01} :value="i.answer_01.title" id="1"/>
+           <input type="button" class="btn-text" @click="checkIfItIsCorrect(i.answer_02.is_correct,i.answer_02.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_2,true:correctMessage_02} :value="i.answer_02.title" id="2"/>
+           <input type="button"  class="btn-text" @click="checkIfItIsCorrect(i.answer_03.is_correct,i.answer_03.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_3,true:correctMessage_03} :value="i.answer_03.title" id="3"/>
+           <input type="button" class="btn-text" @click="checkIfItIsCorrect(i.answer_04.is_correct,i.answer_04.id_button),checkGameIsFinish()" v-bind:class={false:failedMessage_4,true:correctMessage_04} :value="i.answer_04.title" id="4"/>
           </article>
-          <button v-if="goToNextQuizz"  @click="nextQuizz" class="btn-next-quizz">siguiente quizz</button>
+        </article>
+</section>
+<div class="btn-go">
+          <button v-if="goToNextQuizz"  @click="nextQuizz" class="btn-next-quizz">Siguiente quizz</button>
           <router-link v-if="showResult"  :to="{name:'result',params:{guest:countOfGuest,miss:countOfMiss}}">
           <button class="btn-check-result">Ver resultado</button>
           </router-link>
-        </article>
-</section>
+</div>
 </template>
 
 <script>
@@ -26,16 +28,19 @@ export default {
         failedMessage_1 : false,
         failedMessage_2:false,
         failedMessage_3:false,
-        correctMessage : false,
+        failedMessage_4:false,
+        correctMessage_01 : false,
+        correctMessage_02 : false,
+        correctMessage_03 : false,
+        correctMessage_04 : false,
+        goToNextQuizz:false,
+        showResult : false,
+        stopChrono : false,
         time:30,
         numberOfQuizz : 1,
-        goToNextQuizz:false,
         filteredQuizz:[],
-        finishGame : false,
-        quizzContinued:false,
         countOfGuest :0,
-        countOfMiss: 0,
-        showResult : false
+        countOfMiss: 0
 
         }
     },
@@ -56,6 +61,8 @@ export default {
             if(this.quizzes.quizzes.length !== this.numberOfQuizz){
                 this.goToNextQuizz = true
             }
+            this.stopChrono = true
+            
         },
         filterQuizz(){
             this.filteredQuizz = this.quizzes.quizzes.filter((i) => i.id ===this.numberOfQuizz)
@@ -63,10 +70,15 @@ export default {
         },
         nextQuizz(){
             this.numberOfQuizz++
-            this.correctMessage = false
+            this.correctMessage_01 = false
+            this.correctMessage_02 = false
+            this.correctMessage_03 = false
+            this.correctMessage_04 = false
+            this.stopChrono = false
             this.failedMessage_1 = false
             this.failedMessage_2 = false
             this.failedMessage_3 = false
+            this.failedMessage_4 = false
             this.time = 30
             this.goToNextQuizz = false
             this.filterQuizz()
@@ -74,17 +86,14 @@ export default {
         chronometer(){
              setInterval(()=>{
                 
-                if (this.correctMessage === false){
+                if (this.stopChrono == false){
                         if (this.time > 0){
                             this.time--
                         }
                         
                         if (this.time == 0){
                             this.time= "se acabo el tiempo"
-                            this.correctMessage = true
-                            document.getElementById("2").disabled = true
-                            document.getElementById("3").disabled = true
-                            document.getElementById("4").disabled = true
+                            this.findTheCorrect()
                             this.countOfMiss++
                             this.checkGameIsFinish()
 
@@ -99,30 +108,49 @@ export default {
             document.getElementById("3").disabled = true
             document.getElementById("4").disabled = true
         },
+        findTheCorrect(){
+            for (let i of this.filteredQuizz){
+                if(i.answer_01.is_correct == true){
+                    this.correctMessage_01 = true
+                }
+                if(i.answer_02.is_correct == true){
+                    this.correctMessage_02 = true
+                }
+                if(i.answer_03.is_correct == true){
+                    this.correctMessage_03 = true
+                }
+                if(i.answer_04.is_correct == true){
+                    this.correctMessage_04 = true
+                }
+            }
+        },
+        findTheButtonPress(id_button){
+            if (id_button == "1"){
+                this.failedMessage_1= true
+            }
+            if (id_button == "2"){
+                this.failedMessage_2 = true
+            }
+            if (id_button == "3"){
+                this.failedMessage_3 = true
+            }
+            if (id_button == "4"){
+                this.failedMessage_4 = true
+            }
+
+        },
         checkIfItIsCorrect(answer,id_button){
             if (answer === true){
                 this.countOfGuest++
-                this.correctMessage = true
+                this.findTheCorrect()
                 this.disabledTheButton()
             }
-            if (answer === false && id_button ==="2") {
+            if (answer === false) {
                 this.countOfMiss++
-                this.failedMessage_1 = true
-                this.correctMessage = true
+                this.findTheButtonPress(id_button)
+                this.findTheCorrect()
                 this.disabledTheButton()
 
-            }
-            if (answer === false && id_button ==="3") {
-                this.countOfMiss++
-                this.failedMessage_2 = true
-                this.correctMessage = true
-                this.disabledTheButton()
-            }
-            if (answer === false && id_button ==="4") {
-                this.countOfMiss++
-                this.failedMessage_3 = true
-                this.correctMessage = true
-                this.disabledTheButton()
             }
         }
     }
@@ -150,6 +178,11 @@ export default {
 .btn-text:hover{
     background-color: #3d0563;
 }
+.btn-go{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
 
 
 .btn-check-result{
@@ -158,7 +191,6 @@ export default {
     border: 2px solid #a80780;
     border-radius:2em;
     color: white;
-    margin-left: 17em;
     margin-top: 1em;
 
 }
@@ -173,7 +205,6 @@ export default {
     border: 2px solid #a00836;
     border-radius:2em;
     color: white;
-    margin-left: 17em;
     margin-top: 1em;
 }
 .btn-next-quizz:hover{
@@ -193,8 +224,22 @@ export default {
 .false{
     background-color:  rgb(150, 12, 12);
 }  
+.false:hover{
+    background-color:  rgb(150, 12, 12);
+}
 .true{
     background-color:  rgb(6, 90, 6);
 }
+.true:hover{
+    background-color:  rgb(6, 90, 6);
+}
+
+.true_2{
+    background-color:  rgb(6, 90, 6);
+}
+.true_2:hover{
+    background-color:  rgb(6, 90, 6);
+}
+
 
 </style>

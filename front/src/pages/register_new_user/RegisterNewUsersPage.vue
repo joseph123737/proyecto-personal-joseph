@@ -3,7 +3,7 @@
   <label for="userName">Nombre de usuario: </label>
   <input type="text"  id="userName" v-model="newUser.user_name">
 
-  <label for="password" class="input-form">Contraseña: </label>
+  <label class="label-form" for="password">Contraseña: </label>
   <input type="text" id="password" v-on:keyup.enter="sendNewUser()" v-model="newUser.password">
   <button class="login-btn" @click="sendNewUser">Registrase</button> 
 </section>
@@ -58,18 +58,22 @@ export default {
     margin-top: 1.3em;
 }
 .login-btn{
-  border:2px solid #a31d1e;;
-  padding: 1em;
-  font-size: 0.9em;
-  font-weight: bold;
-  background-color:#a31d1e;
-  color:rgb(247, 225, 181);
-  margin-top: 1em;
-  text-align: center;
+    background-color: #7209b7;
+    padding: 0.5em;
+    border: 2px solid #3d0563;
+    border-radius:2em;
+    color: white;
+    text-decoration: none;
+    margin-top: 2em;
 
 }
 .login-btn:hover{
-  background-color: #771e1e;
+  background-color: #3d0563;
 }
+.label-form{
+  margin-top: 2em;
+}
+
+
  
 </style>

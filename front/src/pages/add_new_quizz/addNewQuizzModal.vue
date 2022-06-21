@@ -2,8 +2,8 @@
     <main class="modal-wrapper">
         <section class="modal-inner-wrapper">
             <button class="close-btn" @click="closeModal">x</button>
-            <div class="patat" v-for="quizz in dict_quizz" :key="quizz.id_quizz" >
-                <p class="pa">{{quizz.quizz_name}}</p>
+            <div class="modal-contents" v-for="quizz in dict_quizz" :key="quizz.id_quizz" >
+                <p class="quizz-name">{{quizz.question_quizz}}</p>
                 <button @click="deleteQuizz(quizz)">x</button>
             </div>
         </section>
@@ -23,7 +23,6 @@ export default {
         dictQuizz: {
             handler(newValue){
                 let quizzAsJson = JSON.stringify(newValue)
-                console.log(newValue) 
                 return JSON.parse(quizzAsJson)
 
             },
@@ -80,13 +79,13 @@ export default {
     padding: 1em 1em 3em;
     color:#fae8b9;
 }
-.patat{
+.modal-contents{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.pa{
+.quizz-name{
     font-size: 1.2em;
     margin-top: 0.5em;
     font-weight: bold;

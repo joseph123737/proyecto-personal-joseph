@@ -7,7 +7,7 @@
 
 }
 body{
-  background-color: #4cc9f0;
+  background: linear-gradient(45deg, #FC466B, #3F5EFB);
   min-height: 100vh;
 }
 #nav {

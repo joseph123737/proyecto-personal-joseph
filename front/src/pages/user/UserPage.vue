@@ -19,6 +19,9 @@
       </li>
 
     </ul>
+    <router-link :to="{name:'quizzes'}">
+      <button class="btn-back-to-select-quizz">Volver a seleccionar quizz</button>
+    </router-link>
 
   </main>
 </template>
@@ -68,5 +71,17 @@ li{
   flex-direction: column;
   align-items: center;
   justify-items: center;
+}
+
+.btn-back-to-select-quizz{
+    background-color: #7209b7;
+    padding: 0.5em;
+    border: 2px solid #3d0563;
+    border-radius:2em;
+    color: white;
+    text-decoration: none;
+}
+.btn-back-to-select-quizz:hover{
+  background-color: #3d0563;
 }
 </style>

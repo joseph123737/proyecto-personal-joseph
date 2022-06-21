@@ -60,29 +60,32 @@ export default {
 }
 
 .btn-quizz{
-    background-color: #f01066;
-    padding: 0.5em;
-    border: 2px solid #b40e4e;
-    border-radius:2em;
-    color: white;
-    max-width: 29em;
-    padding: 0.8em 20em ;
-    text-decoration: none;
-
-}
-.btn-quizz:hover{
-background-color: #b40e4e;
-}
-
-.btn-left{
     background-color: #7209b7;
     padding: 0.5em;
     border: 2px solid #3d0563;
     border-radius:2em;
     color: white;
+    max-width: 29em;
+    padding: 0.8em 20em ;
+    text-decoration: none;
+    text-align: center;
+
+}
+.btn-quizz:hover{
+background-color: #3d0563;
+}
+
+.btn-left{
+    
+    background-color: #f01066;
+    padding: 0.5em;
+  
+    border: 2px solid #b40e4e;
+    border-radius:2em;
+    color: white;
 }
 .btn-left:hover{
-    background-color: #3d0563;
+    background-color: #b40e4e;
 }
 
 .btn-rigth{

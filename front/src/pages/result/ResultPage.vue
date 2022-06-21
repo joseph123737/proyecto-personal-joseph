@@ -1,6 +1,10 @@
 <template>
-  <h1>HAS ACERTADO: {{countOfGuest}} DE {{countOfMiss+countOfGuest}}</h1>
-    <button @click="userDetail">ver perfil</button>
+  <main class="main">
+    <h1>HAS ACERTADO: {{countOfGuest}} DE {{countOfMiss+countOfGuest}}</h1>
+    <button @click="userDetail" class="btn-check-profile">ver perfil</button>
+
+
+  </main>
 </template>
 
 <script>
@@ -27,6 +31,8 @@ export default {
         let response =  await fetch(`${config.API_PATH}/users/users-stats/change-stats/${user.user_id}`,settings)
         if (response.status == 200){
           this.$router.push({name:"user",params:{id:user.user_id}})
+        }else{
+          alert("algo a salido mal")
         }
     },
   },
@@ -37,6 +43,24 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.btn-check-profile{
+    background-color: #0c1bee;
+    padding: 0.5em;
+    border: 2px solid #0a16bd;
+    border-radius:2em;
+    color: white;
+}
+
+.btn-check-profile:hover{
+    background-color: #0a16bd;
+}
+
 
 </style>

@@ -1,12 +1,12 @@
 <template>
   <section>
-      <h1 class="text">Bienvenido a Proyecto Escorpion(temporal)</h1>
+      <h1 class="text">Bienvenido</h1>
   </section>
   <section class="form">
       <label for="username">introduzca su usuario</label>
       <input type="text" v-model="user.user_name" id="username">
 
-      <label for="password">introduzca su contraseña</label>
+      <label class="label-form"   for="password">introduzca su contraseña</label>
       <input type="password" v-on:keyup.enter="authenticationUser()" v-model="user.password" id="password">
 
       <button class="login-btn" @click="authenticationUser">logearse</button>
@@ -76,19 +76,23 @@ export default {
   flex-direction: column;
   max-width: 20em;
   margin: 3em auto 0;
+  
 }
 .login-btn{
-  border:2px solid #a31d1e;;
-  padding: 1em;
-  font-size: 0.9em;
-  font-weight: bold;
-  background-color:#a31d1e;
-  color:rgb(247, 225, 181);
-  margin-top: 1em;
+    background-color: #7209b7;
+    padding: 0.5em;
+    border: 2px solid #3d0563;
+    border-radius:2em;
+    color: white;
+    text-decoration: none;
+    margin-top: 2em;
 
 }
 .login-btn:hover{
-  background-color: #771e1e;
+  background-color: #3d0563;
+}
+.label-form{
+  margin-top: 2em;
 }
 .text{
   text-align: center;
