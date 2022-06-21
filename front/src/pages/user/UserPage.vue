@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import {config} from '@/config.js'
 export default {
   data(){
     return{
@@ -36,7 +37,7 @@ export default {
   },
   methods:{
     async loadData(){
-        let response =  await fetch(`http://192.168.21.143:5000/api/users/users-stats/${this.$route.params.id}`)
+        let response =  await fetch(`${config.API_PATH}/users/users-stats/${this.$route.params.id}`)
         this.user =  await response.json()
     },
     calculatedPercentOfGuest(){

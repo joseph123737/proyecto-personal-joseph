@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {config} from '@/config.js'
 import { useStorage } from "@vueuse/core";
 export default {
     data(){
@@ -47,7 +48,7 @@ export default {
         body: JSON.stringify(this.user),
     };
     if (this.checkIfTheInputAreEmpty()){
-      const response = await fetch("http://localhost:5000/auth/login", settings);
+      const response = await fetch(`${config.AUTH_PATH}/login`, settings);
       if (response.status == 401){
         alert("unauthorize")
       }

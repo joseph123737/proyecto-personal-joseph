@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import {config} from '@/config.js'
 export default {
   data(){
     return{
@@ -23,7 +24,7 @@ export default {
                 "Content-Type": "application/json"
               },
         };
-        let response =  await fetch(`http://192.168.21.143:5000/api/users/users-stats/change-stats/${user.user_id}`,settings)
+        let response =  await fetch(`${config.API_PATH}/users/users-stats/change-stats/${user.user_id}`,settings)
         if (response.status == 200){
           this.$router.push({name:"user",params:{id:user.user_id}})
         }
