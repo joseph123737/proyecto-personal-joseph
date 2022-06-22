@@ -1,4 +1,7 @@
 <template>
+  <router-link :to="{name:'quizzes'}">
+    <button class="btn-go-to-back">Volver a la seleccion de quizzes</button>
+  </router-link>
   <header class="hd">
       <button @click="deleteAll" class="btn-delete-all">Borrar quizz</button>
       <button @click="openModal" class="btn-open-modal">Ver lista de quizzes</button>
@@ -18,10 +21,10 @@
               <input class="answer" type="text" name="" id="response_2" placeholder="escribe aqui tu respuesta" v-model="answer2Title">
               <input type="radio" name="radio" id="radio_02" value="2" v-model="is_correct">
            </li>
-          <li>
+           <li>
               <input class="answer" type="text" name="" id="response_3" placeholder="escribe aqui tu respuesta" v-model="answer3Title">
               <input type="radio" name="radio" id="radio_03" value="3" v-model="is_correct">
-          </li>
+           </li>
           <li>
               <input class="answer" type="text" name="" id="response_4" placeholder="escribe aqui tu respuesta" v-model="answer4Title">
               <input type="radio" name="radio" id="radio_04" value="4" v-model="is_correct">
@@ -30,6 +33,7 @@
   </main>
     <AddNewQuizzModal v-if="modalOpened" :dictQuizz="quizzes" @changed="changeQuizzes" @modalToFalse="closeModal"/>
     <button @click="saveQuizzOnCollection" class="btn-add-to-colection" >Añadir a la coleccion</button>
+
 </template>
 
 <script>
@@ -162,17 +166,32 @@ export default {
 
 <style scoped>
 
+
 *{
     margin: 0;
     padding: 0;
 }
 
-.principal-question{
+.btn-go-to-back{
     margin: 0.5em;
     text-align: center;
     background-color: #7209b7;
     padding: 0.5em;
     border: 2px solid #3d0563;
+    border-radius:2em;
+    color: white;
+    text-decoration: none;
+}
+.btn-go-to-back:hover{
+    background-color: #3d0563;
+}
+
+.principal-question{
+    margin: 0.5em;
+    text-align: center;
+    background-color: #fc0796;
+    padding: 0.5em;
+    border: 2px solid #e70c8c;
     border-radius:2em;
     color: white;
 }
@@ -188,18 +207,18 @@ ul{
     margin-top: 2em;
     text-align: center;
     max-width: 17em;
-    background-color: #7209b7;
+    background-color: #fc0796;
     padding: 0.5em;
-    border: 2px solid #3d0563;
+    border: 2px solid #e70c8c;
     border-radius:2em;
     color: white;
 }
 .answer{
     margin: 0.5em;
     text-align: center;
-    background-color: #7209b7;
+    background-color: #eb0b8d;
     padding: 0.5em;
-    border: 2px solid #3d0563;
+    border: 2px solid #e70c8c;
     border-radius:2em;
     color: white;
 }
@@ -238,28 +257,28 @@ ul{
 }
 
 .btn-finish-form{
-   background-color: #eb0b8d;
+   background-color: rgb(16, 218, 16);
    padding: 0.5em;
-   border: 2px solid #b80a6f;
+   border: 2px solid rgb(12, 184, 12);
    border-radius:2em;
    color: white;
    margin-top: 1em;
 }
 
 .btn-finish-form:hover{
-    background-color: #b80a6f;
+    background-color: rgb(12, 184, 12);
 }
 
 .btn-open-modal{
-   background-color: #0ceb04;
+   background-color: #74eb04;
    padding: 0.5em;
-   border: 2px solid #0cb606;
+   border: 2px solid #60c007;
    border-radius:2em;
    color: white;
    margin-top: 1em; 
 }
 .btn-open-modal:hover{
-    background-color: #0cb606;
+    background-color: #60c007;
 }
 
 .btn-delete-all{
