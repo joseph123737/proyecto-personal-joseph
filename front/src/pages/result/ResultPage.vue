@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {config} from '@/config.js'
+import {updateUsersStats} from '@/services/api.js'
 export default {
   data(){
     return{
@@ -21,14 +21,7 @@ export default {
     async userDetail(){
         const userJson = localStorage.getItem("auth");
         const user = JSON.parse(userJson);
-        const settings = {
-              method: "PUT",
-              body: JSON.stringify(this.newData),
-              headers: {
-                "Content-Type": "application/json"
-              },
-        };
-        let response =  await fetch(`${config.API_PATH}/users/users-stats/change-stats/${user.user_id}`,settings)
+        let response =  await updateUsersStats(this.newData,)
         if (response.status == 200){
           this.$router.push({name:"user",params:{id:user.user_id}})
         }else{

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {config} from '@/config.js'
+import {getAllQuizzes} from '@/services/api.js'
 export default {
     data(){
         return{
@@ -28,7 +28,7 @@ export default {
     },
     methods:{
         async loadData(){
-            let response =  await fetch(`${config.API_PATH}/quizz`)
+            let response =  await getAllQuizzes()
             this.quizzes =  await response.json()
         },
         goToAddNewQuizz(){

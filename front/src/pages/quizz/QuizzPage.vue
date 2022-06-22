@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {config} from '@/config.js'
+import {getQuizzById} from '@/services/api.js'
 export default {
     data(){
         return{
@@ -50,7 +50,7 @@ export default {
         },
     methods:{ 
         async loadData(){
-            let response =  await fetch(`${config.API_PATH}/quizz/${this.$route.params.id}`)
+            let response =  await getQuizzById(this.$route.params.id)
             this.quizzes =  await response.json()
             this.filterQuizz()
         },
