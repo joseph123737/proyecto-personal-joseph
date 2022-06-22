@@ -185,7 +185,7 @@ def main():
         )
     )
     users_stast_repository = UserStatsRepository(database_path)
-    users_stast_repository.save_users_stats(UsersStats(12, 2, "01", "Valentina"))
+    users_stast_repository.save_users_stats(UsersStats(12, 2, "01", "joseph"))
 
 
 if __name__ == "__main__":
